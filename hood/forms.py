@@ -17,3 +17,15 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = UserCreationForm.Meta.fields + ("email","username","password1")
+
+class ProfileUpdateForm(forms.ModelForm):
+    '''
+    Profile Update form
+    Allows user to add a bio and custom avatar
+    '''
+    class Meta:
+        model= Profile
+        fields = ['avatar','bio']
+        widgets ={
+            'bio':forms.Textarea(attrs={'placeholder':'Bio'})
+        }
