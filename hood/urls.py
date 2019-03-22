@@ -9,6 +9,7 @@ urlpatterns=[
     url(r'login/', auth_views.LoginView.as_view(authentication_form=LoginForm), name='login'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),
+    url(r'^edit/$', views.edit_profile, name='edit_profile'),
 ]
 
 if settings.DEBUG:

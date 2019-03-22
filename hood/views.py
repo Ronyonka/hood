@@ -22,9 +22,35 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('edit_profile')
 
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html',{'form':form})
 
+@login_required
+def edit_profile(request):
+
+   user = request.user
+
+   if request.method == 'POST':
+      form = ProfileUpdateForm(request.POST,request.FILES,instance=user.profile)
+      user_form = UserUpdateForm(request.POST,instance=user)
+      if user_form.is_valid() and form.is_valid():
+         user_form.save()
+         profile = form.save(commit=False)
+         profile.user = user
+         profile.save()
+         messages.info(request, 'You\'ve successfully updated your account!')
+         return redirect('home')
+   else:
+      form = ProfileUpdateForm(instance=request.user)
+      user_form = UserUpdateForm(instance=request.user.profile)
+
+   context = { 
+      'user': user,
+      'user_form': user_form,
+      'form': form
+   }
+
+   return render(request, 'edit-profile.html', context)
