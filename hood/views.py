@@ -9,7 +9,7 @@ from .forms import *
 @login_required
 def home(request):
    user = request.user
-   return render(request, 'home.html'{'user':user})
+   return render(request, 'home.html',{'user':user})
 
 def signup(request):
     if request.method =='POST':

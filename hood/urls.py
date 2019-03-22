@@ -3,6 +3,7 @@ from . import views
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+from .forms import LoginForm
 
 urlpatterns=[
     url(r'^$', views.home, name='home'),
