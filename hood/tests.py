@@ -67,8 +67,8 @@ class ProfileTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create(username='mnimn')
         self.location = Location.objects.create(name='yandhi')
-        self.hood = Hood.objects.create(id=1, name='yezzy',location=self.location)
-        self.prof = Profile.objects.create(user=self.user,avatar='path/to/photo',bio='test bio',hood=self.hood,location=self.location)
+        self.hood = Hood.objects.create(name='yeezy',location=self.location)
+        self.prof = Profile.objects.create(user=self.user, avatar='path/to/photo', bio='test bio', hood=self.hood, location=self.location)
 
     def tearDown(self):
         self.prof.delete()
@@ -76,11 +76,15 @@ class ProfileTestCase(TestCase):
         self.location.delete()
         self.user.delete()
 
-    def test_profile_instance(self):
-        self.assertTrue(isinstance(self.prof, Profile))
+    # def test_profile_instance(self):
+    #     self.assertTrue(isinstance(self.prof, Profile))
 
-    def test_profile_save(self):
-        self.prof.save_profile()
-        self.assertTrue(i)
+    # def test_profile_save(self):
+    #     self.prof.save_profile()
+    #     prof = Profile.objects.all()
+    #     self.assertTrue(len(prof)>0)
 
+class BusinessTestCase(TestCase):
+    def setUp(self):
+        
 

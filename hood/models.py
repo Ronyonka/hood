@@ -50,6 +50,12 @@ class Profile(models.Model):
     hood = models.ForeignKey(Hood, related_name='prohood')
     location = models.ForeignKey(Location, related_name='prolocation')
 
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -72,6 +78,11 @@ class Posts(models.Model):
     category = models.ForeignKey(Category,related_name='ctgry')
     author = models.ForeignKey(Profile,on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
+
+    @classmethod
+    def get_post_by_neighborhood(cls,hood):
+        hoodie = cls.objects.filter(hood__icontains=hood)
+        return hoodie
 
 class Comments(models.Model):
     comment = models.TextField(max_length=280)
