@@ -12,6 +12,11 @@ class Location(models.Model):
     def delete_location(self):
         self.delete()
 
+    @classmethod
+    def get_location_by_id(cls,id):
+        lctn = cls.objects.filter(pk=id)
+        return lctn
+
 class Hood(models.Model):
     name = models.CharField(max_length= 140)
     location = models.ForeignKey(Location, related_name='place')
@@ -31,6 +36,12 @@ class Contact(models.Model):
     health = models.CharField(max_length = 30)
     police = models.CharField(max_length=30)
     location = models.ForeignKey(Location, related_name='emergency')
+
+    def save_contact(self):
+        self.save()
+
+    def delete_contact(self):
+        self.delete()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
