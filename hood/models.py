@@ -76,6 +76,20 @@ class Business(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
 
+    def __str__(self):
+        self.name
+
+    def save_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def get_business(cls,id):
+        biz = cls.objects.filter(hood__pk=id)
+        return biz
+
 class Category(models.Model):
     category = models.CharField(max_length=40)
 

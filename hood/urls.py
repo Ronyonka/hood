@@ -7,6 +7,7 @@ from .forms import LoginForm
 
 urlpatterns=[
     url(r'^$', views.home, name='home'),
+    url(r'hood/(\d+)',views.hood, name='hood'),
     url(r'login/', auth_views.LoginView.as_view(authentication_form=LoginForm), name='login'),
     url(r'^signup/$', views.signup, name='signup'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'login'}, name='logout'),

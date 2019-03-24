@@ -9,8 +9,9 @@ from .forms import *
 
 # @login_required
 def home(request):
-   user = request.user
-   return render(request, 'home.html',{'user':user})
+   profile = Profile.objects.get(user = request.user)
+   buisnesses = Business.objects.filter(hood = profile.hood)
+   return render(request, 'home.html',{'profile':profile,'hood':hood, 'businesses':buisnesses})
 
 def signup(request):
     if request.method =='POST':
@@ -55,3 +56,10 @@ def edit_profile(request):
    }
 
    return render(request, 'edit-profile.html', context)
+
+@login_required
+def hood(request,id):
+   user = request.user
+   businesses = Business.get_business(id=id)
+
+   return render(request,'hood.html',{'user':user,'businesses':businesses})
