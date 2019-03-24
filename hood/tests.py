@@ -65,26 +65,26 @@ class ContacTestCase(TestCase):
 
 class ProfileTestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='mnimn')
-        self.location = Location.objects.create(name='yandhi')
-        self.hood = Hood.objects.create(name='yeezy',location=self.location)
-        self.prof = Profile.objects.create(user=self.user, avatar='path/to/photo', bio='test bio', hood=self.hood, location=self.location)
+        self.user = User.objects.create(username='testuser', password='12345')
+        self.profile = Profile(id=1,user=self.user, avatar='path/to/avatar', bio='test bio')
 
     def tearDown(self):
-        self.prof.delete()
-        self.hood.delete()
-        self.location.delete()
+        self.profile.delete()
         self.user.delete()
 
-    # def test_profile_instance(self):
-    #     self.assertTrue(isinstance(self.prof, Profile))
+    def test_profile_instance(self):
+        self.assertTrue(isinstance(self.profile, Profile))
 
-    # def test_profile_save(self):
-    #     self.prof.save_profile()
-    #     prof = Profile.objects.all()
-    #     self.assertTrue(len(prof)>0)
+    def test_save_profile(self):
+        self.profile.save_profile()
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile) > 0)
 
-class BusinessTestCase(TestCase):
-    def setUp(self):
+    
+    # def tearDown(self):
+    #     self.profile.delete()
+
+# class BusinessTestCase(TestCase):
+#     def setUp(self):
         
 

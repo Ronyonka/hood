@@ -3,6 +3,18 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+
 class Location(models.Model):
     name = models.CharField(max_length=140)
 
@@ -20,6 +32,7 @@ class Location(models.Model):
 class Hood(models.Model):
     name = models.CharField(max_length= 140)
     location = models.ForeignKey(Location, related_name='place')
+    
 
     def save_hood(self):
         self.save()
@@ -47,20 +60,14 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(null=True,blank=True, upload_to='avatars/')
     bio = models.TextField(null=True,blank=True,max_length=500)
-    hood = models.ForeignKey(Hood, related_name='prohood')
-    location = models.ForeignKey(Location, related_name='prolocation')
+    hood = models.ForeignKey(Hood, related_name='prohood',null=True)
+
 
     def save_profile(self):
         self.save()
 
     def delete_profile(self):
         self.delete()
-
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()
 
 class Business(models.Model):
     name = models.CharField(max_length=80)
@@ -80,8 +87,8 @@ class Posts(models.Model):
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
 
     @classmethod
-    def get_post_by_neighborhood(cls,hood):
-        hoodie = cls.objects.filter(hood__icontains=hood)
+    def get_post_by_neighborhood(cls,id):
+        hoodie = cls.objects.filter(hood__pk=id)
         return hoodie
 
 class Comments(models.Model):
