@@ -110,13 +110,13 @@ def new_posts(request):
     if request.method == 'POST':
         form = PostForm(request.POST,request.FILES)
         if form.is_valid():
-            business = form.save(commit=False)
-            business.owner = profile
-            business.hood = profile.hood
-            business.save()
+            posts = form.save(commit=False)
+            posts.author = profile
+            posts.hood = profile.hood
+            posts.save()
             return redirect('home')
     else:
         form = PostForm()
 
-    return render(request, 'add_business.html', {"form":form})
+    return render(request, 'add_posts.html', {"form":form})
 
