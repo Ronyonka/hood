@@ -71,8 +71,10 @@ class Profile(models.Model):
 
 class Business(models.Model):
     name = models.CharField(max_length=80)
+    description = models.TextField(null=True)
     image = models.ImageField(null=True,blank=True, upload_to='business/')
     email = models.EmailField(blank=True,null=True)
+    phone = models.CharField(max_length=30,null=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
 
@@ -92,6 +94,9 @@ class Business(models.Model):
 
 class Category(models.Model):
     category = models.CharField(max_length=40)
+
+    def __str__(self):
+        self.category
 
 class Posts(models.Model):
     title = models.CharField(max_length=60)

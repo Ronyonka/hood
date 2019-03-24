@@ -2,6 +2,7 @@ from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import *
 from .forms import *
@@ -63,3 +64,21 @@ def hood(request,id):
    businesses = Business.get_business(id=id)
 
    return render(request,'hood.html',{'user':user,'businesses':businesses})
+
+   
+@login_required
+def new_business(request):
+    profile = Profile.objects.get(user = request.user)
+    user= request.user
+    if request.method == 'POST':
+        form = BusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.owner = profile
+            business.hood = profile.hood
+            business.save()
+            return redirect('home')
+    else:
+        form = BusinessForm()
+
+    return render(request, 'add_business.html', {"form":form})

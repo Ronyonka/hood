@@ -53,3 +53,11 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username','password']
+
+class BusinessForm(forms.ModelForm):
+    '''
+    A form that allows users to add businesses
+    '''
+    class Meta:
+        model = Business
+        fields = ['name','description','image','email','phone']

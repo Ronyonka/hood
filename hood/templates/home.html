@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
+    <p>Edit Your Profile <a href="{% url 'edit_profile' %}">Here</a></p>
         <div class="row">
             {% if businesses %}
+            {% for business in businesses%}
             <div class="col-md-4">
                 <div class="card">
-                    
+                    <div class="card-header">
+                        <h2>{{business.name}}</h2>
+                    </div>
+                    <div class="card-body">
+                        <img src="{{business.image.url}}" alt="">
+                    </div>
                 </div>
             </div><!--end of column-->
+            {% endfor %}
             {% else %}
-            <h1>There are No Registered businesses in This Neighbourhood. <a href="">Add One</a></h1>
+            <h1>There are No Registered businesses in This Neighbourhood. <a href="{% url 'new_business' %}">Add One</a></h1>
             {% endif %}
         </div><!-- end of row-->
     </div>
