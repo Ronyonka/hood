@@ -61,3 +61,11 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ['name','description','image','email','phone']
+
+class PostForm(forms.ModelForm):
+    '''
+    A form that allows users to add posts
+    '''
+    class Meta:
+        model = Posts
+        fields = ['title','post','category']

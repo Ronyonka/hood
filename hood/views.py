@@ -96,9 +96,27 @@ def own_profile(request):
    Directs Current User to their own Profile.
    '''
    user = request.user  
+   hood = Hood.objects.all()
    profile = Profile.objects.all().filter(user=user)  
    buisnesses = Business.objects.all().filter(owner_id = user.id)
    posts = Posts.objects.all().filter(author=profile)
 
-   return render(request, 'profile.html', {'businesses':buisnesses,'profile':profile, "user":user,"posts":posts, "current_user":request.user })
+   return render(request, 'profile.html', {'businesses':buisnesses,'profile':profile, "user":user,"posts":posts, "hood":hood })
+
+@login_required
+def new_posts(request):
+    profile = Profile.objects.get(user = request.user)
+    user= request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST,request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.owner = profile
+            business.hood = profile.hood
+            business.save()
+            return redirect('home')
+    else:
+        form = PostForm()
+
+    return render(request, 'add_business.html', {"form":form})
 

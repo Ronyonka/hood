@@ -1,3 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
+    <div class="row" style="padding-top:40px;">
+        <div class="col-md-4 col-sm-6">
+                {% if user.profile.avatar %}
+            <img src="{{user.profile.avatar.url}}" alt="" style="height:150px; width:150px; border-radius:50%;">
+            {% else %}
+            <img src="" alt="something here">
+            {% endif %}
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <p><strong>Name: </strong>{{user.first_name}} {{user.last_name}}</p>
+            <p><strong>Username: </strong>{{user}}</p>
+            <p><strong>Hood: </strong>{{user.profile.hood}}</p>
+            {% if user.profile.user == user %}
+            <a href="{% url 'edit_profile' %}"><i class="fas fa-user-cog" style="color:black;"></i></a>
+            {% endif%}
+        </div>
+    </div>
+        <hr>    
+    <div class="row">
+
+        {% if businesses %}
+        {% for business in businesses%}
+        <div class="col-md-4 col-sm-12">
+                <div class="card" style="width: 100%;">
+                        <img class="card-img-top" src="{{business.image.url}}" alt="Card image cap" style="height:250px">
+                        <div class="card-body">
+                          <h5 class="card-title" style="font-weight:bold;">{{business.name}}</h5>
+                          <p class="card-text">{{business.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"> <span style="font-weight:bold;">Owner: </span>{{business.owner}}</li>
+                          <li class="list-group-item"><span style="font-weight:bold;">email: </span>{{buseness.email}}</li>
+                          <li class="list-group-item"><span style="font-weight:bold;">Phone: </span>{{business.phone}}</li>
+                        </ul>
+
+        </div><!--end of column-->
+        {% endfor %}
+        {% else%}
+        <h1>No Businesses </h1>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
