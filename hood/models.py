@@ -32,6 +32,8 @@ class Location(models.Model):
 class Hood(models.Model):
     name = models.CharField(max_length= 140)
     location = models.ForeignKey(Location, related_name='place')
+    health = models.CharField(max_length = 30, null=True)
+    police = models.CharField(max_length=30,null=True)
     
 
     def save_hood(self):
@@ -45,16 +47,6 @@ class Hood(models.Model):
         home = cls.objects.filter(pk=id)
         return home
 
-class Contact(models.Model):
-    health = models.CharField(max_length = 30)
-    police = models.CharField(max_length=30)
-    location = models.ForeignKey(Location, related_name='emergency')
-
-    def save_contact(self):
-        self.save()
-
-    def delete_contact(self):
-        self.delete()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
