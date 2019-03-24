@@ -91,14 +91,14 @@ def business(request):
    return render(request, 'business.html',{'profile':profile, 'businesses':buisnesses})
 
 @login_required
-def profile(request, username):
-    user = User.objects.get(username = username)
-    profile = Profile.objects.get(user = user)
-    businesses = Business.objects.filter(user = profile)
-    posts = Posts.objects.filter(user= profile)
-    context = {
-        'profile': profile,
-        'businesses': businesses
-    }
-    return render(request, 'profile.html', context)
+def own_profile(request):
+   '''
+   Directs Current User to their own Profile.
+   '''
+   user = request.user  
+   profile = Profile.objects.all().filter(user=user)  
+   buisnesses = Business.objects.all().filter(owner_id = user.id)
+   posts = Posts.objects.all().filter(author=profile)
+
+   return render(request, 'profile.html', {'businesses':buisnesses,'profile':profile, "user":user,"posts":posts, "current_user":request.user })
 

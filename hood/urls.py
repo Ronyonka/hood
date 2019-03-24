@@ -8,7 +8,8 @@ from .forms import LoginForm
 urlpatterns=[
     url(r'^$', views.home, name='home'),
     url(r'^hood/(\d+)',views.hood, name='hood'),
-    url(r'^business',views.business,name='business'),
+    url(r'^business/$',views.business,name='business'),
+    url(r'^myprofile/$',views.own_profile,name='myprofile'),
     url(r'^new_business/$',views.new_business,name='new_business'),
     url(r'login/', auth_views.LoginView.as_view(authentication_form=LoginForm), name='login'),
     url(r'^signup/$', views.signup, name='signup'),
