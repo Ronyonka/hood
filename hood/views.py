@@ -120,3 +120,7 @@ def new_posts(request):
 
     return render(request, 'add_posts.html', {"form":form})
 
+@login_required
+def posts(request):
+   return render(request, 'posts.html')
+
