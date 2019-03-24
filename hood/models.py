@@ -18,6 +18,10 @@ def save_user_profile(sender, instance, **kwargs):
 class Location(models.Model):
     name = models.CharField(max_length=140)
 
+
+    def __str__(self):
+        return self.name
+
     def save_location(self):
         self.save()
 
@@ -35,6 +39,8 @@ class Hood(models.Model):
     health = models.CharField(max_length = 30, null=True)
     police = models.CharField(max_length=30,null=True)
     
+    def __str__(self):
+        return self.name
 
     def save_hood(self):
         self.save()
@@ -54,6 +60,8 @@ class Profile(models.Model):
     bio = models.TextField(null=True,blank=True,max_length=500)
     hood = models.ForeignKey(Hood, related_name='prohood',null=True)
 
+    def __str__(self):
+        return f'{self.user.username}'
 
     def save_profile(self):
         self.save()
