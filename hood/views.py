@@ -10,6 +10,7 @@ from .forms import *
 
 # @login_required
 def home(request):
+   hood = Hood.objects.all()
    profile = Profile.objects.get(user = request.user)
    buisnesses = Business.objects.filter(hood = profile.hood)
    return render(request, 'home.html',{'profile':profile,'hood':hood, 'businesses':buisnesses})
@@ -82,3 +83,9 @@ def new_business(request):
         form = BusinessForm()
 
     return render(request, 'add_business.html', {"form":form})
+
+@login_required
+def business(request):
+   profile = Profile.objects.get(user = request.user)
+   buisnesses = Business.objects.filter(hood = profile.hood)
+   return render(request, 'business.html',{'profile':profile, 'businesses':buisnesses})
