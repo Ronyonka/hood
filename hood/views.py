@@ -89,3 +89,16 @@ def business(request):
    profile = Profile.objects.get(user = request.user)
    buisnesses = Business.objects.filter(hood = profile.hood)
    return render(request, 'business.html',{'profile':profile, 'businesses':buisnesses})
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username = username)
+    profile = Profile.objects.get(user = user)
+    businesses = Business.objects.filter(user = profile)
+    posts = Posts.objects.filter(user= profile)
+    context = {
+        'profile': profile,
+        'businesses': businesses
+    }
+    return render(request, 'profile.html', context)
+

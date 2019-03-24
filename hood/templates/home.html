@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <h1 class="text-center" style="padding: top 20px;">Hello {{profile.user.username}} Welcome To {{profile.hood.name}}</h1>
+    <h1 class="text-center" style="padding: top 20px;">Hello {{profile.user.username}}!! Welcome To {{profile.hood.name}}</h1>
     <div class="row" style="padding-top:60px;">
         <div class="col-md-6 col-sm-12">
                 <div class="card" style="width: 100%;">
                         <img class="card-img-top" style="height:250px" src="https://www.gannett-cdn.com/-mm-/3b8b0abcb585d9841e5193c3d072eed1e5ce62bc/c=0-30-580-356/local/-/media/2018/09/13/USATODAY/usatsports/small-business-open-2_large.jpg?width=3200&height=1680&fit=crop" alt="Card image cap">
                         <div class="card-body">
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <p class="card-text">View some of the businesses found in {{profile.hood.name}}. </p>
+                          <a href="{% url 'business' %}" class="btn btn-outline-secondary">View Businesses</a>
                         </div>
                       </div>
         </div>
@@ -15,7 +16,8 @@
                 <div class="card" style="width: 100%;">
                         <img class="card-img-top" src="https://hdc.com.mv/app/wp-content/themes/hdc_web_v2/assets/img/announcements.png"  style="height:250px" alt="Card image cap">
                         <div class="card-body">
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <p class="card-text">Some important announcements for residents of {{profile.hood.name}}.</p>
+                          <a href="{% url 'home' %}" class="btn btn-outline-secondary">View Announcements</a>
                         </div>
                       </div>
         </div>
