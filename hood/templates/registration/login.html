@@ -5,9 +5,9 @@
   <div class="row" style="padding-top:100px;">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <div class="card text-center">
-            <div class="card-header">
-        <h2>Log in to Sitexpo</h2>
+        <div class="card text-center" style="border-radius: 12px;">
+            <div class="card-header" style="background-color: #E4BE9E;">
+        <h2>Log in to Hood</h2>
         </div>
         <div class="card-body">
         {% if form.errors %}
@@ -29,9 +29,9 @@
             </p>
           {% endfor %}
         </div>
-        <div class="card-footer">
-          <button type="submit">Log in</button>
-          <a href="{% url 'signup' %}">New to Sitexpo? Sign up</a>
+        <div class="card-footer" style="background-color: #E4BE9E;">
+          <button type="submit" class="btn btn-outline-secondary" >Log in</button>
+          <p style="padding-top:6px;">New to Hood?<a href="{% url 'signup' %}" class="btn btn-outline-info">Sign up</a> </p>
         </div>
         </form>
         </div>

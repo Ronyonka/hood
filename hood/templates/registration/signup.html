@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="container">
-  <div class="row" style="padding-top:100px;">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+  <div class="row" style="padding-top:80px;">
+    <div class="col-md-4 col-sm-2"></div>
+    <div class="col-md-4 col-sm-8">
         <div class="card text-center">
-          <div class="card-header">
+          <div class="card-header" style="background-color: #E4BE9E;">
         <h2>Sign up</h2>
         </div>
         <div class="card-body">
@@ -26,13 +26,14 @@
             </p>
           {% endfor %}
           </div>
-          <div class="card-footer">
-          <button type="submit">Sign up</button>
+          <div class="card-footer" style="background-color: #E4BE9E;">
+          <button type="submit" class="btn btn-outline-secondary">Sign up</button>
+          <p>Already have an account? <a href="{% url 'login' %}" class="btn btn-outline-info">Login</a></p>
           </div>
         </form>
       </div>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4 col-sm-2"></div>
   </div>
 </div>
 
