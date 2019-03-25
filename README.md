@@ -1,27 +1,23 @@
-# Sitexpo
-#### Date of Current Version (March 20th,2019)
+# Hood
+#### Date of Current Version (March 25th,2019)
 #### By **Ron Onyonka**
 ## Description
-This is an app that allows users to post projects they have worked on and have other users rate and review them.
+If you are like me, You really don’t know what is happening in your neighborhood most of the time. What if an important meeting happens, theft or even death wouldn’t you like to know about it. Hood is a web app that allows users to keep up to date with what is happening in their neighberhoods.
 
 
 
 ## Behaviour Driven Development
 | Behaviour     | Input     | Output  |
 | ------------- |:-------------:| -----:|
-| Home Page| - | - |
-| User log in | Username and password | Redirected to the homepage with other users projects |
-| Search for project | Project title in the search bar | They are directed to a page with projects by different users with the title displayed |
-| Adding Projects | They select add project | they select an image from their device that they would love to add |
-| Viewing Single Projects | Click View Details| Redirected to a page with the details of the projects and the ratings and reviews |
-| Rating and reviewing a project | Select a rating (between 1-10) for design, usability and content and write in a review| The ratings are averaged and the review is displayed |
+| User signup | User enters credentials | Redirected to a page where they can edit their profile|
+| Home page | - | - |
+| View Businesses | Users click on view business| Redirected to pages with businesses from that specific neighborhood |
+| Viewing Annoncements | Click View Announcements| Redirected to a page with Announcements from  |
+| Search Business | Enter search term in the search bar | User redirected to page with businesses containing the search term |
 
 ## Link to Live Website 
-Here is a link to the live website: <https://sitexpo.herokuapp.com/>
+Here is a link to the live website: <https://ronhood.herokuapp.com/>
 
-## API Endpoints
-- For Projects <https://sitexpo.herokuapp.com/api/projects/>
-- For Profiles <https://sitexpo.herokuapp.com/api/profiles/>
 
 ### Technologies Used
 
@@ -45,8 +41,8 @@ You need the following to work on the project: -
 
 ### Clone the repo and check into the project folder
 
-- `git clone https://github.com/Ronyonka/sitexpo`
-- `cd sitexpo`
+- `git clone https://github.com/Ronyonka/hood`
+- `cd hood`
 
 ### Create and activate the virtual environment
 
@@ -64,7 +60,7 @@ You need the following to work on the project: -
 
 ```bash
 (virtual)$ psql
-    user=# CREATE DATABASE sitexpo;
+    user=# CREATE DATABASE hood;
 ```
 
 
@@ -73,7 +69,7 @@ You need the following to work on the project: -
 ```bash
 SECRET_KEY=''
 DEBUG=True #Set To False in Production
-DB_NAME='sitexpo'
+DB_NAME='hood'
 DB_USER='user'
 DB_PASSWORD='password'
 DB_HOST='127.0.0.1'
