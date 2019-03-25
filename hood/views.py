@@ -161,3 +161,4 @@ def search(request):
         }
         
     return render(request, 'search.html', context)
+
