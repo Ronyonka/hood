@@ -79,7 +79,7 @@ class Business(models.Model):
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
 
     def __str__(self):
-        self.name
+        return self.name
 
     def save_business(self):
         self.save()
@@ -96,7 +96,7 @@ class Category(models.Model):
     category = models.CharField(max_length=40)
 
     def __str__(self):
-        self.category
+        return self.category
 
 class Posts(models.Model):
     title = models.CharField(max_length=60)
@@ -104,6 +104,9 @@ class Posts(models.Model):
     category = models.ForeignKey(Category,related_name='ctgry')
     author = models.ForeignKey(Profile,on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)
+
+    def __str__(self):
+        self.title
 
     @classmethod
     def get_post_by_neighborhood(cls,id):

@@ -106,7 +106,6 @@ def own_profile(request):
 @login_required
 def new_posts(request):
     profile = Profile.objects.get(user = request.user)
-    user= request.user
     if request.method == 'POST':
         form = PostForm(request.POST,request.FILES)
         if form.is_valid():

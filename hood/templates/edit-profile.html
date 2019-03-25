@@ -1,23 +1,15 @@
-{% extends "base.html" %}
-{% load static %}
-
+{% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block content %}
 <div class="container">
-    <div class="page">
-      
-        <div class="update-form">
-  
-           <form action="" method="post" enctype="multipart/form-data">
-              <div class="legend">
-                 <h5>Edit Profile</h5>
-              </div>
-              {% csrf_token %}
-              {{ user_form.as_p }}
-              {{ form.as_p }}
-              <button type="submit" class="btn">Submit</button>
-           </form>
-        </div>
-        
-     </div>
+        <div class="card w-75 my-5 mx-auto">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form user_form%}
+                        {% bootstrap_form form%}
+                        <input type="submit" value="Submit" class="btn btn-outline-secondary">
+                    </form>
+                </div>    
 </div>
-{% endblock content %}
+{% endblock %}
