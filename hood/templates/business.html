@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
+        {% if businesses %}
+        <div class="something" style="padding-top:30px;">
+                <a href="{% url 'new_business' %}" class="btn btn-outline-secondary text-center" >Add Businesses </a>
+        </div>
         <div class="row" style="padding-top:40px;">
-            {% if businesses %}
             {% for business in businesses%}
             <div class="col-md-4 col-sm-12">
                     <div class="card" style="width: 100%;">
@@ -20,7 +23,7 @@
             </div><!--end of column-->
             {% endfor %}
             {% else %}
-            <h1>There are No Registered businesses in This Neighbourhood. <a href="{% url 'new_business' %}">Add One</a></h1>
+            <h1>There are No Registered businesses in This Neighbourhood. <a href="{% url 'new_business' %}" class="btn btn-outline-secondary">Add One</a></h1>
             {% endif %}
         </div><!-- end of row-->
     </div>

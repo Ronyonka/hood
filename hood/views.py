@@ -121,5 +121,7 @@ def new_posts(request):
 
 @login_required
 def posts(request):
-   return render(request, 'posts.html')
+   profile = Profile.objects.get(user = request.user)
+   posts = Posts.objects.filter(hood = profile.hood)
+   return render(request, 'posts.html',{'profile':profile,'posts':posts})
 
