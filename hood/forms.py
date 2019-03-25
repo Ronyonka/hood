@@ -69,3 +69,13 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Posts
         fields = ['title','post','category']
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ['location']
+
+class HoodForm(forms.ModelForm):
+    class Meta:
+        model = Hood
+        fields = ['neighborhood','health','police','chief']

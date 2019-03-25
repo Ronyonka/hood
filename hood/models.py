@@ -16,11 +16,11 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Location(models.Model):
-    name = models.CharField(max_length=140)
+    location = models.CharField(max_length=140)
 
 
     def __str__(self):
-        return self.name
+        return self.location
 
     def save_location(self):
         self.save()
@@ -34,13 +34,15 @@ class Location(models.Model):
         return lctn
 
 class Hood(models.Model):
-    name = models.CharField(max_length= 140)
+    neighborhood = models.CharField(max_length= 140)
     location = models.ForeignKey(Location, related_name='place')
     health = models.CharField(max_length = 30, null=True)
     police = models.CharField(max_length=30,null=True)
+    chief = models.CharField(max_length=30, null=True)
+    fire_services = models.CharField(max_length=30, null=True)
     
     def __str__(self):
-        return self.name
+        return self.neighborhood
 
     def save_hood(self):
         self.save()
@@ -73,7 +75,7 @@ class Business(models.Model):
     name = models.CharField(max_length=80)
     description = models.TextField(null=True)
     image = models.ImageField(null=True,blank=True, upload_to='business/')
-    email = models.EmailField(blank=True,null=True)
+    email = models.CharField(max_length=30,blank=True,null=True)
     phone = models.CharField(max_length=30,null=True)
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE)

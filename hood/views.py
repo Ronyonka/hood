@@ -8,7 +8,7 @@ from .models import *
 from .forms import *
 
 
-# @login_required
+@login_required
 def home(request):
    hood = Hood.objects.all()
    profile = Profile.objects.get(user = request.user)
@@ -125,3 +125,39 @@ def posts(request):
    posts = Posts.objects.filter(hood = profile.hood)
    return render(request, 'posts.html',{'profile':profile,'posts':posts})
 
+@login_required
+def new_hood(request):
+   if request.method == 'POST':
+         form = LocationForm(request.POST,request.FILES)
+         hood_form = HoodForm(request.POST,request.FILES)
+         if form.is_valid() and hood_form.is_valid():
+            location = form.save(commit=False)
+            location.save()
+            hood = hood_form.save(commit=False)
+            hood.location = location
+            hood.save()
+            return redirect('home')
+   else:
+      form = LocationForm()
+      hood_form = HoodForm()
+
+   context = { 
+      'hood_form': hood_form,
+      'form': form
+   }
+
+   return render(request, 'new_hood.html', context)
+
+@login_required(login_url='/accounts/login')
+def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        profile = Profile.objects.get(user = request.user)
+        search_term = request.GET.get('search')
+        businesses = Business.objects.filter(hood = profile.hood, name__icontains = search_term)
+        message = f'{search_term}'
+        context = {
+            'message': message,
+            'businesses': businesses
+        }
+        
+    return render(request, 'search.html', context)
