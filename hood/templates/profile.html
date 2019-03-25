@@ -2,20 +2,23 @@
 {% block content %}
 <div class="container">
     <div class="row" style="padding-top:40px;">
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-4">
                 {% if user.profile.avatar %}
             <img src="{{user.profile.avatar.url}}" alt="" style="height:150px; width:150px; border-radius:50%;">
             {% else %}
-            <img src="" alt="something here">
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="something here" style="height:150px; width:150px; border-radius:50%;">
             {% endif %}
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-4">
             <p><strong>Name: </strong>{{user.first_name}} {{user.last_name}}</p>
             <p><strong>Username: </strong>{{user}}</p>
             <p><strong>Hood: </strong>{{user.profile.hood}}</p>
             {% if user.profile.user == user %}
             <a href="{% url 'edit_profile' %}"><i class="fas fa-user-cog" style="color:black;"></i></a>
             {% endif%}
+        </div>
+        <div class="col-md-4">
+            <p><strong>Bio: </strong>{{user.profile.bio}}</p>
         </div>
     </div>
         <hr>    
